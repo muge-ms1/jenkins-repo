@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK21'       // Use the exact name from Global Tool Configuration
-        maven 'MAVEN3'    // Use the exact name from Global Tool Configuration
+        jdk 'JDK21'
+        maven 'MAVEN3'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/muge-ms1/jenkins-repo.git'
+                git branch: 'main', url: 'https://github.com/muge-ms1/jenkins-repo.git'
             }
         }
 
