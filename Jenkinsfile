@@ -6,12 +6,12 @@ pipeline {
         maven 'MAVEN3'
     }
 
-stage('Checkout') {
-    steps {
-        git branch: 'main', url: 'https://github.com/muge-ms1/jenkins-repo.git'
-    }
-}
-
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/muge-ms1/jenkins-repo.git'
+            }
+        }
 
         stage('Build') {
             steps {
@@ -23,6 +23,21 @@ stage('Checkout') {
             steps {
                 sh 'mvn test'
             }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Build succeeded!'
+        }
+        failure {
+            echo '❌ Build failed!'
         }
     }
 }
